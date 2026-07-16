@@ -44,7 +44,10 @@ public class Main {
         		    	System.out.print("Preço: ");
         		    	double preco = teclado.nextDouble();
 
-        		    	Produto produto = new Produto(descricao, preco);
+        		    	System.out.print("Estoque: ");
+        		    	int estoque = teclado.nextInt();
+
+        		    	Produto produto = new Produto(descricao, preco, estoque);
 
         		    	dao.salvar(produto);
 
@@ -59,6 +62,7 @@ public class Main {
         		           System.out.println("ID: " + p.getId());
         		           System.out.println("Descrição: " + p.getDescricao());
         		           System.out.println("Preço: " + p.getPreco());
+        		           System.out.println("Estoque: " + p.getEstoque());
         		       }
         		        break;
 
@@ -96,9 +100,13 @@ public class Main {
 
         		    	        System.out.print("Novo preço: ");
         		    	        double precoNovo = teclado.nextDouble();
+        		    	        
+        		    	        System.out.println("Novo estoque: ");
+        		    	        int estoqueNovo = teclado.nextInt();
 
         		    	        produtoAlterar.setDescricao(descricaoNova);
         		    	        produtoAlterar.setPreco(precoNovo);
+        		    	        produtoAlterar.setEstoque(estoqueNovo);
 
         		    	        dao.alterar(produtoAlterar);
 

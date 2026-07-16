@@ -5,6 +5,7 @@ public class Produto {
 	private int id;
 	private String descricao;
 	private double preco;
+	private int estoque;
 	
 	
 	
@@ -15,15 +16,21 @@ public class Produto {
 	
 	
 
-	public Produto(String descricao, double preco) {
-	setDescricao(descricao);
-	setPreco(preco);
+	public Produto(String descricao, double preco, int estoque) {
+	    setDescricao(descricao);
+	    setPreco(preco);
+	    setEstoque(estoque);
 	}
 	
-	public Produto(int id, String descricao,double preco) {
-		setId(id);
-		setDescricao(descricao);
-		setPreco(preco);
+
+
+
+
+	public Produto(int id, String descricao, double preco, int estoque) {
+	    setId(id);
+	    setDescricao(descricao);
+	    setPreco(preco);
+	    setEstoque(estoque);
 	}
 	
 	
@@ -50,6 +57,14 @@ public class Produto {
 
 	public void setPreco(double preco) {
 		this.preco = preco;
+	}
+	
+	public int getEstoque() {
+	    return estoque;
+	}
+
+	public void setEstoque(int estoque) {
+	    this.estoque = estoque;
 	}
 
 }
