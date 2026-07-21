@@ -2,15 +2,27 @@ import java.util.List;
 import java.util.Scanner;
 import dao.ProdutoDao;
 import modelos.Produto;
+import modelos.Cliente;
+import dao.ClienteDao;
+
 
 public class Main {
 
     public static void main(String[] args) {
 
-        ProdutoDao dao = new ProdutoDao();
+    	ProdutoDao dao = new ProdutoDao();
+    	ClienteDao dao1 = new ClienteDao();
+
+        Cliente cliente = dao1.consultar(1);
+
+        System.out.println(cliente.getNome());
+        System.out.println(cliente.getEmail());
+
         Scanner teclado = new Scanner(System.in);
         int opcao = 0;
         int opcaoProduto;
+        
+     
         
         do {
         	System.out.println("\n===== MENU =====");
@@ -49,13 +61,13 @@ public class Main {
 
         		    	Produto produto = new Produto(descricao, preco, estoque);
 
-        		    	dao.salvar(produto);
+        		    	dao1.salvar(produto);
 
         		    	System.out.println("Produto cadastrado com sucesso!");
         		        break;
 
         		    case 2:
-        		       List<Produto> produtos = dao.consultar();
+        		       List<Produto> produtos = dao1.consultar();
         		       
         		       for (Produto p : produtos) {
         		    	   System.out.println("----------------");
@@ -71,7 +83,7 @@ public class Main {
         		        System.out.print("Digite o ID do produto: ");
         		        int id = teclado.nextInt();
 
-        		        Produto produtoConsultado = dao.consultar(id);
+        		        Produto produtoConsultado = dao1.consultar(id);
 
         		        if (produtoConsultado != null) {
 
@@ -89,7 +101,7 @@ public class Main {
         		    	  System.out.print("Digite o ID do produto: ");
         		    	    int idAlterar = teclado.nextInt();
 
-        		    	    Produto produtoAlterar = dao.consultar(idAlterar);
+        		    	    Produto produtoAlterar = dao1.consultar(idAlterar);
 
         		    	    if (produtoAlterar != null) {
 
@@ -108,7 +120,7 @@ public class Main {
         		    	        produtoAlterar.setPreco(precoNovo);
         		    	        produtoAlterar.setEstoque(estoqueNovo);
 
-        		    	        dao.alterar(produtoAlterar);
+        		    	        dao1.alterar(produtoAlterar);
 
         		    	        System.out.println("Produto alterado com sucesso!");
 
@@ -122,11 +134,11 @@ public class Main {
         		    	 System.out.print("Digite o ID do produto: ");
         		    	    int idExcluir = teclado.nextInt();
 
-        		    	    Produto produtoExcluir = dao.consultar(idExcluir);
+        		    	    Produto produtoExcluir = dao1.consultar(idExcluir);
 
         		    	    if (produtoExcluir != null) {
 
-        		    	        dao.deletar(idExcluir);
+        		    	        dao1.deletar(idExcluir);
 
         		    	        System.out.println("Produto excluído com sucesso!");
 
@@ -148,8 +160,51 @@ public class Main {
         	    break;
         	    
 
+        	
         	case 2:
-        	    System.out.println("Menu de Clientes");
+
+        	    teclado.nextLine();
+
+        	    System.out.print("CPF: ");
+        	    String cpf = teclado.nextLine();
+
+        	    System.out.print("Nome: ");
+        	    String nome = teclado.nextLine();
+
+        	    System.out.print("Email: ");
+        	    String email = teclado.nextLine();
+
+        	    System.out.print("Rua: ");
+        	    String rua = teclado.nextLine();
+
+        	    System.out.print("Número: ");
+        	    int numero = teclado.nextInt();
+        	    teclado.nextLine();
+
+        	    System.out.print("Bairro: ");
+        	    String bairro = teclado.nextLine();
+
+        	    System.out.print("CEP: ");
+        	    String cep = teclado.nextLine();
+
+        	    System.out.print("Cidade: ");
+        	    String cidade = teclado.nextLine();
+
+        	    System.out.print("Estado: ");
+        	    String estado = teclado.nextLine();
+
+        	    Cliente cliente = new Cliente(cpf, nome, email, rua,
+        	            numero, bairro, cep, cidade, estado);
+
+        	    Cliente retorno = clienteDao.salvar(cliente);
+
+        	    if (retorno != null) {
+        	        System.out.println("Cliente cadastrado com sucesso!");
+        	        System.out.println("ID do cliente: " + retorno.getId());
+        	    } else {
+        	        System.out.println("Erro ao cadastrar cliente!");
+        	    }
+
         	    break;
 
         	case 3:
